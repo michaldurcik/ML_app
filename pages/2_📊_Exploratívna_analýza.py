@@ -18,7 +18,7 @@ progress_bar = st.sidebar.progress(50)
 st.write("# 📊 Exploratívna analýza ")
 
 def nacitaj ():
-    return(pd.read_csv(r"streamlit_apps/campaign.csv",sep = ";"))
+    return(pd.read_csv(r"campaign.csv",sep = ";"))
 
 data = nacitaj()
 
