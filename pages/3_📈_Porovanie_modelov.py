@@ -25,11 +25,11 @@ with st.sidebar.form("my_form"):
         from sklearn.model_selection import train_test_split
         X_train,X_test,y_train,y_test=train_test_split(data[options],data["y"],test_size=0.3, random_state=125)
         rfc.fit(X_train,y_train)
-        y_pred = rfc.predict(X_test)
+        st.session_state['model'] = rfc
+        y_pred = st.session_state['model'].predict(X_test)
         from sklearn.metrics import accuracy_score
         acc = accuracy_score(y_test, y_pred)
         st.write("Presnosť modelu", acc)
-        st.session_state['model'] = rfc
         st.session_state['prem'] = options
 
 
