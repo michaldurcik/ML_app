@@ -18,12 +18,12 @@ with st.sidebar.form("my_form"):
     data.columns.tolist()[:-1])
 
    # Every form must have a submit button.
+   from sklearn.model_selection import train_test_split
+   X_train,X_test,y_train,y_test=train_test_split(data[options],data["y"],test_size=0.3, random_state=125)
    submitted = st.form_submit_button("Trénovať")
    if submitted:
         from sklearn.ensemble import RandomForestClassifier
         rfc = RandomForestClassifier(random_state=125)
-        from sklearn.model_selection import train_test_split
-        X_train,X_test,y_train,y_test=train_test_split(data[options],data["y"],test_size=0.3, random_state=125)
         rfc.fit(X_train,y_train)
         st.session_state['model'] = rfc
         y_pred = st.session_state['model'].predict(X_test)
@@ -54,6 +54,7 @@ with tab_1:
 with tab_2:
     try:
         from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+        y_pred = st.session_state['model'].predict(X_test)
         fig = px.imshow(confusion_matrix(y_test,y_pred),text_auto=True, title="Konfúzna matica", labels={'x': 'Predikovaná', 'y':'Skutočná'})
         st.plotly_chart(fig, use_container_width=True, sharing="streamlit", theme="streamlit")
     except:
