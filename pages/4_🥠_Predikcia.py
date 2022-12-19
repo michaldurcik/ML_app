@@ -59,4 +59,4 @@ try:
     except:
         st.error("Najskôr je potrebné zadať vstupné parametre !!!")
 except:
-        st.error("Najskôr je potrebné zbehnúť exploratívnu analýzu a natrénovať model !!!")
+        st.error("Najskôr je potrebné natrénovať model !!!")
